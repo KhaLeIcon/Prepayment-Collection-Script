@@ -1,0 +1,258 @@
+[
+  {
+    "CompanyCode": "SAC1",
+    "SalesOrder": "1SA0001279",
+    "Customer": "HS58M1PTWJ",
+    "SalesOrderItem": {
+      "SalesOrderItem": "30",
+      "YY1_SALESFORCEID_I_SDI": "LNsac1test1000000012"
+    },
+    "AccountingDocument": "100000983",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "SAC1",
+    "SalesOrder": "1SA0001359",
+    "Customer": "HS58M1PTWJ",
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "500VD00000JosDaYAJ"
+    },
+    "AccountingDocument": "100000983",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "SAC1",
+    "SalesOrder": "1SA0001361",
+    "Customer": "HS58M1PTWJ",
+    "SalesOrderItem": {
+      "SalesOrderItem": "30",
+      "YY1_SALESFORCEID_I_SDI": "500VD00000K684DYAR"
+    },
+    "AccountingDocument": "100000983",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "SAC1",
+    "SalesOrder": "1SA0001361",
+    "Customer": "HS58M1PTWJ",
+    "SalesOrderItem": {
+      "SalesOrderItem": "40",
+      "YY1_SALESFORCEID_I_SDI": "500VD00000K9DtnYAF"
+    },
+    "AccountingDocument": "100000984",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "SAC1",
+    "SalesOrder": "1SA0001365",
+    "Customer": "HS58M1PTWJ",
+    "SalesOrderItem": {
+      "SalesOrderItem": "20",
+      "YY1_SALESFORCEID_I_SDI": "SAC1_SIT_5"
+    },
+    "AccountingDocument": "100000983",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "SAC1",
+    "SalesOrder": "1SA0001367",
+    "Customer": "HS58M1PTWJ",
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "500VD00000JosDaYAJ"
+    },
+    "AccountingDocument": "100000983",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "SAC1",
+    "SalesOrder": "1SA0001367",
+    "Customer": "HS58M1PTWJ",
+    "SalesOrderItem": {
+      "SalesOrderItem": "20",
+      "YY1_SALESFORCEID_I_SDI": "500VD00000JosDaYAJ"
+    },
+    "AccountingDocument": "100000983",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "MAC1",
+    "SalesOrder": "1MA0000101",
+    "Customer": "YARBWS3E9Z",
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "MAC1_SAKE_10"
+    },
+    "AccountingDocument": "1400000024",
+    "FiscalYear": "2025"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000440",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_HUT_002"
+    },
+    "AccountingDocument": "9400000035",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000044"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000489",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "LNAEC1test1000000001"
+    },
+    "AccountingDocument": "9400000063",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000078"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000516",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_1"
+    },
+    "AccountingDocument": "9400000088",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000103"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000516",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "40",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_4"
+    },
+    "AccountingDocument": "9400000091",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000106"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000516",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "50",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_5"
+    },
+    "AccountingDocument": "9400000092",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000107"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000519",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_10"
+    },
+    "AccountingDocument": "9400000093",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000108"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000519",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "20",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_11"
+    },
+    "AccountingDocument": "9400000094",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000109"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000519",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "30",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_12"
+    },
+    "AccountingDocument": "9400000095",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000110"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000519",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "40",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_13"
+    },
+    "AccountingDocument": "9400000096",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000111"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000519",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "50",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_14"
+    },
+    "AccountingDocument": "9400000097",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000112"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000521",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "AEC1_SAKE_20"
+    },
+    "AccountingDocument": "9400000100",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000115"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000513",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "LNAEC1_250813_000002"
+    },
+    "AccountingDocument": "9400000086",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000101"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000515",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "LNAEC1_250813_000004"
+    },
+    "AccountingDocument": "9400000087",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000102"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "SalesOrder": "3AE0000522",
+    "Customer": null,
+    "SalesOrderItem": {
+      "SalesOrderItem": "10",
+      "YY1_SALESFORCEID_I_SDI": "LNAEC1_250815_000001"
+    },
+    "AccountingDocument": "9400000101",
+    "FiscalYear": "2025",
+    "OriginalBillingDocument": "3AE8000117"
+  }
+]

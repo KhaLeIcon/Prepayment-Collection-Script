@@ -1,0 +1,170 @@
+[
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000044')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000044')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-07-11T09%3A03%3A08.6991910Z'\""
+    },
+    "BillingDocument": "3AE8000044",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000078')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000078')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-04T06%3A33%3A06.8027120Z'\""
+    },
+    "BillingDocument": "3AE8000078",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000103')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000103')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-13T10%3A34%3A50.3442440Z'\""
+    },
+    "BillingDocument": "3AE8000103",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000106')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000106')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-13T11%3A04%3A22.8130070Z'\""
+    },
+    "BillingDocument": "3AE8000106",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000107')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000107')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-13T11%3A05%3A26.9062490Z'\""
+    },
+    "BillingDocument": "3AE8000107",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000108')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000108')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-13T11%3A32%3A17.5315590Z'\""
+    },
+    "BillingDocument": "3AE8000108",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000109')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000109')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-14T00%3A22%3A26.4693830Z'\""
+    },
+    "BillingDocument": "3AE8000109",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000110')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000110')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-14T00%3A28%3A02.4578760Z'\""
+    },
+    "BillingDocument": "3AE8000110",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000111')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000111')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-14T00%3A31%3A28.3726290Z'\""
+    },
+    "BillingDocument": "3AE8000111",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000112')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000112')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-14T00%3A36%3A01.1807370Z'\""
+    },
+    "BillingDocument": "3AE8000112",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000115')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000115')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-14T04%3A25%3A48.5847390Z'\""
+    },
+    "BillingDocument": "3AE8000115",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000101')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000101')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-14T09%3A05%3A43.8747080Z'\""
+    },
+    "BillingDocument": "3AE8000101",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000102')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000102')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-13T08%3A10%3A04.8923470Z'\""
+    },
+    "BillingDocument": "3AE8000102",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  },
+  {
+    "__metadata": {
+      "id": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000117')",
+      "uri": "https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/API_BILLING_DOCUMENT_SRV/A_BillingDocument('3AE8000117')",
+      "type": "API_BILLING_DOCUMENT_SRV.A_BillingDocumentType",
+      "etag": "W/\"datetimeoffset'2025-08-15T03%3A58%3A32.5887200Z'\""
+    },
+    "BillingDocument": "3AE8000117",
+    "InvoiceClearingStatus": "C",
+    "YY1_PrepaymentScenario_BDH": "B",
+    "CompanyCode": "AEC1"
+  }
+]

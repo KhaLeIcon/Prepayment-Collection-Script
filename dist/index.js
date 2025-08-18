@@ -34891,7 +34891,7 @@ const baseDir = isPkg
     // in dev, resolve to project root
     : path.join(__dirname, '..');
 
-// ---------- Speed: shared axios client with Keep‑Alive ----------
+// ---------- Speed: shared axios client with KeepÃ¢â‚¬'Alive ----------
 const httpsAgent = new https.Agent({ keepAlive: true, maxSockets: 40 });
 const http = axios.create({
   timeout: 30000,
@@ -34942,21 +34942,29 @@ async function fetchAllRecords(baseUrl, auth, params) {
 }
 
 // Process company codes with scenario B
-// Process company codes with scenario B
-async function processScenarioB(companyCodeRows, config, auth) {
+async function processScenarioB(companyCodeRows, config, auth, companyCodeConfigMap) {
     console.log(`Processing ${companyCodeRows.length} company codes with Scenario B`);
     
     const {
         ScenarioB: scenarioBUrlPath,
         GetSalesOrderB: getSalesOrderBUrlPath,
-        FilterSalesOrderItem: itemUrlPath
+        FilterSalesOrderItem: itemUrlPath,
+        Flag: flagUrlPath
     } = config.cpi.endpoints;
 
     const { hostname } = auth.credentials;
     const scenarioBUrl = hostname + scenarioBUrlPath;
     const getSalesOrderBUrl = hostname + getSalesOrderBUrlPath;
     const itemUrl = hostname + itemUrlPath;
+    const flagUrl = hostname + flagUrlPath;
     
+    // Create debug folder
+    const debugFolder = path.join(baseDir, 'debug');
+    fs.mkdirSync(debugFolder, { recursive: true });
+    
+    // Collect data for each step
+    const step1Data = [];
+    const step2Data = [];
     const scenarioBResults = [];
     
     for (const row of companyCodeRows) {
@@ -34974,6 +34982,7 @@ async function processScenarioB(companyCodeRows, config, auth) {
             });
             
             const scenarioBRecords = scenarioBResp.data?.d?.results || [];
+            step1Data.push(...scenarioBRecords.map(record => ({ ...record, CompanyCode })));
             console.log(`Found ${scenarioBRecords.length} records from ScenarioB API for CompanyCode: ${CompanyCode}`);
             
             // Step 2: For each BillingDocument, call GetSalesOrderB URL
@@ -34988,7 +34997,7 @@ async function processScenarioB(companyCodeRows, config, auth) {
                                 auth: auth.auth,
                                 params: {
                                     $filter: `ReferenceDocument eq '${BillingDocument}'`,
-                                    $select: 'AccountingDocument,FiscalYear,SalesDocument,SalesDocumentItem,AmountInCompanyCodeCurrency'
+                                    $select: 'AccountingDocument,FiscalYear,SalesDocument,SalesDocumentItem'
                                 }
                             });
                             
@@ -35000,15 +35009,11 @@ async function processScenarioB(companyCodeRows, config, auth) {
 
                             return validRecords.map(fr => ({
                                 CompanyCode,
-                                SalesOrder: fr.SalesDocument,
-                                Customer: null, // Will be populated in future API calls
-                                SalesOrderItem: {
-                                    SalesOrderItem: fr.SalesDocumentItem,
-                                    YY1_SALESFORCEID_I_SDI: null // Will be populated in step 3
-                                },
+                                BillingDocument,
                                 AccountingDocument: fr.AccountingDocument,
                                 FiscalYear: fr.FiscalYear,
-                                OriginalBillingDocument: BillingDocument // Keep track of original billing document
+                                SalesDocument: fr.SalesDocument,
+                                SalesDocumentItem: fr.SalesDocumentItem
                             }));
                             
                         } catch (error) {
@@ -35021,9 +35026,10 @@ async function processScenarioB(companyCodeRows, config, auth) {
             
             // Flatten results and filter out nulls
             const flatResults = getSalesOrderBResults.filter(Boolean).flat();
+            step2Data.push(...flatResults);
             
             // Step 3: For each unique SalesOrder, get YY1_SALESFORCEID_I_SDI from items
-            const uniqueSalesOrders = [...new Set(flatResults.map(r => r.SalesOrder))];
+            const uniqueSalesOrders = [...new Set(flatResults.map(r => r.SalesDocument))];
             const salesOrderItemsMap = new Map();
             
             await Promise.all(
@@ -35059,34 +35065,115 @@ async function processScenarioB(companyCodeRows, config, auth) {
                 )
             );
             
-            // Update flatResults with YY1_SALESFORCEID_I_SDI
-            flatResults.forEach(result => {
-                const itemMap = salesOrderItemsMap.get(result.SalesOrder);
-                if (itemMap && result.SalesOrderItem.SalesOrderItem) {
-                    const salesforceId = itemMap[result.SalesOrderItem.SalesOrderItem];
-                    if (salesforceId) {
-                        result.SalesOrderItem.YY1_SALESFORCEID_I_SDI = salesforceId;
-                    }
-                }
+            // Transform to final format with YY1_SALESFORCEID_I_SDI
+            const transformedResults = flatResults.map(result => {
+                const itemMap = salesOrderItemsMap.get(result.SalesDocument);
+                const salesforceId = itemMap ? itemMap[result.SalesDocumentItem] : null;
+                
+                return {
+                    CompanyCode: result.CompanyCode,
+                    SalesOrder: result.SalesDocument,
+                    Customer: null, // Will be populated in future API calls
+                    SalesOrderItem: {
+                        SalesOrderItem: result.SalesDocumentItem,
+                        YY1_SALESFORCEID_I_SDI: salesforceId
+                    },
+                    AccountingDocument: result.AccountingDocument,
+                    FiscalYear: result.FiscalYear,
+                    OriginalBillingDocument: result.BillingDocument // Keep track of original billing document
+                };
             });
             
-            scenarioBResults.push(...flatResults);
+            scenarioBResults.push(...transformedResults);
             
-            console.log(`Processed ${flatResults.length} records for CompanyCode: ${CompanyCode}`);
+            console.log(`Processed ${transformedResults.length} records for CompanyCode: ${CompanyCode}`);
             
         } catch (error) {
             console.error(`Error processing Scenario B for CompanyCode ${CompanyCode}:`, error.message);
         }
     }
-    console.log(scenarioBResults)
     
-    console.log(`Total Scenario B results: ${scenarioBResults.length}`);
-    return scenarioBResults;
+    // Save Step 1: ScenarioB URL results
+    fs.writeFileSync(
+        path.join(debugFolder, 'step1_B.json'),
+        JSON.stringify(step1Data, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step1_B.json with ${step1Data.length} records`);
+    
+    // Save Step 2: GetSalesOrderB URL results
+    fs.writeFileSync(
+        path.join(debugFolder, 'step2_B.json'),
+        JSON.stringify(step2Data, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step2_B.json with ${step2Data.length} records`);
+    
+    // Save Step 3: After itemUrl calls (with YY1_SALESFORCEID_I_SDI)
+    fs.writeFileSync(
+        path.join(debugFolder, 'step3_B.json'),
+        JSON.stringify(scenarioBResults, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step3_B.json with ${scenarioBResults.length} records`);
+    
+    // --------- Apply flag filtering to Scenario B results ----------
+    const disallowedStatuses = ["Paid", "Sent", "Error"];
+    const flaggedScenarioBResults = await Promise.all(
+        scenarioBResults.map(r =>
+            flagLimit(async () => {
+                if (!r.AccountingDocument) return null;
+
+                try {
+                    const resp = await http.get(flagUrl, {
+                        auth: auth.auth,
+                        params: {
+                            $filter: `AccountingDocument eq '${r.AccountingDocument}' and CompanyCode eq '${r.CompanyCode}'`
+                        }
+                    });
+
+                    const fr = resp.data?.d?.results?.[0] || {};
+                    const isDisallowedStatus = disallowedStatuses.includes(fr.Statuscode);
+                    
+                    // Get CheckFlagNA setting for this company code
+                    const companyConfig = companyCodeConfigMap.get(r.CompanyCode);
+                    const checkFlagNA = companyConfig?.CheckFlagNA === 'Yes';
+                    
+                    // Original flag check logic
+                    let isAnyFlagYes = fr.FlagSFUpdated === 'Yes' || fr.FlagInvoiceSent === 'Yes';
+                    
+                    // If CheckFlagNA is 'Yes' for this company code, also check for 'NA' values
+                    if (checkFlagNA) {
+                        isAnyFlagYes = isAnyFlagYes || fr.FlagSFUpdated === 'NA' || fr.FlagInvoiceSent === 'NA';
+                    }
+                    
+                    const exclude = isDisallowedStatus || isAnyFlagYes;
+
+                    return exclude ? null : r;
+                } catch (error) {
+                    console.error(`Error checking flags for AccountingDocument ${r.AccountingDocument} in CompanyCode ${r.CompanyCode}:`, error.message);
+                    return null;
+                }
+            })
+        )
+    );
+    
+    const filteredScenarioBResults = flaggedScenarioBResults.filter(Boolean);
+    
+    // Save Step 4: After flag filtering
+    fs.writeFileSync(
+        path.join(debugFolder, 'step4_B.json'),
+        JSON.stringify(filteredScenarioBResults, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step4_B.json with ${filteredScenarioBResults.length} records`);
+    
+    console.log(`Total Scenario B results after flag filtering: ${filteredScenarioBResults.length}`);
+    return filteredScenarioBResults;
 }
 
-
 // Normal processing for non-B scenarios
-async function processNormalScenario(companyCodeRows, config, auth) {
+async function processNormalScenario(companyCodeRows, config, auth, companyCodeConfigMap) {
     const {
         FilterSalesOrderHeader: headerUrlPath,
         FilterSalesOrderItem: itemUrlPath,
@@ -35100,18 +35187,27 @@ async function processNormalScenario(companyCodeRows, config, auth) {
     const acctUrl = hostname + acctUrlPath;
     const flagUrl = hostname + flagUrlPath;
 
+    // Create debug folder
+    const debugFolder = path.join(baseDir, 'debug');
+    fs.mkdirSync(debugFolder, { recursive: true });
+
     const filterOutSO = Array.isArray(config.filteroutSO)
         ? config.filteroutSO.map(String)
         : [];
 
-    // Get SO for each CompanyCode
+    // Collect data for each step
+    const step1Data = [];
     const finalList = [];
+    
+    // Get SO for each CompanyCode
     for (const row of companyCodeRows) {
         const { CompanyCode } = row;
         console.log(`Processing Normal Scenario for CompanyCode: ${CompanyCode}`);
         if (!CompanyCode) continue;
 
         const headers = await fetchAllRecords(headerUrl, auth.auth, { $filter: `SalesOrganization eq '${CompanyCode}'` });
+        step1Data.push(...headers.map(h => ({ ...h, CompanyCode })));
+        
         const validHeaders = headers.filter(r =>
             r?.YY1_PrepaymentScenario_SDH?.toString().trim() &&
             r?.SalesOrder &&
@@ -35141,6 +35237,22 @@ async function processNormalScenario(companyCodeRows, config, auth) {
           )
         );
     }
+
+    // Save Step 1: Header URL results
+    fs.writeFileSync(
+        path.join(debugFolder, 'step1_notB.json'),
+        JSON.stringify(step1Data, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step1_notB.json with ${step1Data.length} records`);
+
+    // Save Step 2: Item URL results (filtered items with status 'D')
+    fs.writeFileSync(
+        path.join(debugFolder, 'step2_notB.json'),
+        JSON.stringify(finalList, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step2_notB.json with ${finalList.length} sales orders`);
 
     // --------- Bounded parallel: Get Accounting Document ----------
     const processedResults = await Promise.all(
@@ -35179,6 +35291,14 @@ async function processNormalScenario(companyCodeRows, config, auth) {
       )
     );
 
+    // Save Step 3: Accounting Document URL results
+    fs.writeFileSync(
+        path.join(debugFolder, 'step3_notB.json'),
+        JSON.stringify(processedResults, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step3_notB.json with ${processedResults.length} records`);
+
     // --------- Bounded parallel: Filter SO by Flag ----------
     const disallowedStatuses = ["Paid", "Sent", "Error"];
     const flagged = await Promise.all(
@@ -35195,7 +35315,19 @@ async function processNormalScenario(companyCodeRows, config, auth) {
 
           const fr = resp.data?.d?.results?.[0] || {};
           const isDisallowedStatus = disallowedStatuses.includes(fr.Statuscode);
-          const isAnyFlagYes = fr.FlagSFUpdated === 'Yes' || fr.FlagInvoiceSent === 'Yes';
+          
+          // Get CheckFlagNA setting for this company code
+          const companyConfig = companyCodeConfigMap.get(r.CompanyCode);
+          const checkFlagNA = companyConfig?.CheckFlagNA === 'Yes';
+          
+          // Original flag check logic
+          let isAnyFlagYes = fr.FlagSFUpdated === 'Yes' || fr.FlagInvoiceSent === 'Yes';
+          
+          // If CheckFlagNA is 'Yes' for this company code, also check for 'NA' values
+          if (checkFlagNA) {
+            isAnyFlagYes = isAnyFlagYes || fr.FlagSFUpdated === 'NA' || fr.FlagInvoiceSent === 'NA';
+          }
+          
           const exclude = isDisallowedStatus || isAnyFlagYes;
 
           return exclude ? null : r;
@@ -35203,7 +35335,17 @@ async function processNormalScenario(companyCodeRows, config, auth) {
       )
     );
     
-    return flagged.filter(Boolean);
+    const filteredNormalResults = flagged.filter(Boolean);
+    
+    // Save Step 4: Flag URL results (after filtering)
+    fs.writeFileSync(
+        path.join(debugFolder, 'step4_notB.json'),
+        JSON.stringify(filteredNormalResults, null, 2),
+        'utf8'
+    );
+    console.log(`Saved step4_notB.json with ${filteredNormalResults.length} records`);
+    
+    return filteredNormalResults;
 }
 
 async function main() {
@@ -35242,6 +35384,21 @@ async function main() {
     const sheetName = workbook.SheetNames[0];
     const rows = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
+    // Create a map for quick lookup of company code configurations
+    const companyCodeConfigMap = new Map();
+    rows.forEach(row => {
+        if (row.CompanyCode) {
+            companyCodeConfigMap.set(row.CompanyCode, {
+                Scenario: row.Scenario,
+                CheckFlagNA: row.CheckFlagNA
+            });
+        }
+    });
+
+    // Create debug folder
+    const debugFolder = path.join(baseDir, 'debug');
+    fs.mkdirSync(debugFolder, { recursive: true });
+
     // Separate company codes by scenario
     const scenarioBRows = rows.filter(row => row.Scenario === 'B');
     const normalScenarioRows = rows.filter(row => row.Scenario !== 'B');
@@ -35251,35 +35408,20 @@ async function main() {
 
     // Process both scenarios
     const [normalResults, scenarioBResults] = await Promise.all([
-        normalScenarioRows.length > 0 ? processNormalScenario(normalScenarioRows, config, authConfig) : Promise.resolve([]),
-        scenarioBRows.length > 0 ? processScenarioB(scenarioBRows, config, authConfig) : Promise.resolve([])
+        normalScenarioRows.length > 0 ? processNormalScenario(normalScenarioRows, config, authConfig, companyCodeConfigMap) : Promise.resolve([]),
+        scenarioBRows.length > 0 ? processScenarioB(scenarioBRows, config, authConfig, companyCodeConfigMap) : Promise.resolve([])
     ]);
 
     // Combine results from both scenarios
     const combinedFlagResults = [...normalResults, ...scenarioBResults];
 
-    // Save individual debug files
+    // Save final combined results
     fs.writeFileSync(
-        path.join(baseDir, 'normalScenarioResults.json'),
-        JSON.stringify(normalResults, null, 2),
-        'utf8'
-    );
-    console.log(`Saved normalScenarioResults.json with ${normalResults.length} records`);
-
-    fs.writeFileSync(
-        path.join(baseDir, 'scenarioBResults.json'),
-        JSON.stringify(scenarioBResults, null, 2),
-        'utf8'
-    );
-    console.log(`Saved scenarioBResults.json with ${scenarioBResults.length} records`);
-
-    // Save combined results (equivalent to the old getFlag.json)
-    fs.writeFileSync(
-        path.join(baseDir, 'combinedFlagResults.json'),
+        path.join(debugFolder, 'combined.json'),
         JSON.stringify(combinedFlagResults, null, 2),
         'utf8'
     );
-    console.log(`Saved combinedFlagResults.json with ${combinedFlagResults.length} records`);
+    console.log(`Saved combined.json with ${combinedFlagResults.length} records`);
 
     // Group combined results by CompanyCode
     const grouped = combinedFlagResults.reduce((acc, cur) => {

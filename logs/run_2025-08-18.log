@@ -1,0 +1,39 @@
+2025-08-18T06:10:27.779Z [INFO] Logging to file: C:\Code\Prepayment-Collection-Script\logs\run_2025-08-18.log
+2025-08-18T06:10:27.781Z [INFO] Startup diagnostics → {"isPkg":true,"cwd":"C:\\Code\\Prepayment-Collection-Script","execPath":"C:\\Code\\Prepayment-Collection-Script\\index.exe","baseDir":"C:\\Code\\Prepayment-Collection-Script"}
+2025-08-18T06:10:27.782Z [INFO] Running GetPrepaymentSOCollectionInvoiceList.js…
+2025-08-18T06:10:27.798Z [INFO] Found 1 company codes with Scenario B
+2025-08-18T06:10:27.799Z [INFO] Found 3 company codes with normal scenarios
+2025-08-18T06:10:27.799Z [INFO] Processing Normal Scenario for CompanyCode: SAC1
+2025-08-18T06:10:27.822Z [INFO] Processing 1 company codes with Scenario B
+2025-08-18T06:10:27.823Z [INFO] Processing Scenario B for CompanyCode: AEC1
+2025-08-18T06:10:28.738Z [INFO] Found 14 records from ScenarioB API for CompanyCode: AEC1
+2025-08-18T06:10:30.105Z [INFO] Processed 14 records for CompanyCode: AEC1
+2025-08-18T06:10:30.108Z [INFO] Saved step1_B.json with 14 records
+2025-08-18T06:10:30.108Z [INFO] Saved step2_B.json with 14 records
+2025-08-18T06:10:30.109Z [INFO] Saved step3_B.json with 14 records
+2025-08-18T06:10:30.759Z [INFO] Saved step4_B.json with 14 records
+2025-08-18T06:10:30.759Z [INFO] Total Scenario B results after flag filtering: 14
+2025-08-18T06:10:43.795Z [INFO] Processing Normal Scenario for CompanyCode: MAC1
+2025-08-18T06:10:46.071Z [INFO] Processing Normal Scenario for CompanyCode: EGC1
+2025-08-18T06:10:48.540Z [INFO] Saved step1_notB.json with 1703 records
+2025-08-18T06:10:48.541Z [INFO] Saved step2_notB.json with 50 sales orders
+2025-08-18T06:10:48.867Z [WARN] Expected 2 items but got 4 for SalesOrder: 1SA0001176, Item: 10
+2025-08-18T06:10:50.820Z [INFO] Saved step3_notB.json with 81 records
+2025-08-18T06:10:53.074Z [INFO] Saved step4_notB.json with 8 records
+2025-08-18T06:10:53.075Z [INFO] Saved combined.json with 22 records
+2025-08-18T06:10:53.076Z [INFO] Created C:\Code\Prepayment-Collection-Script\output\SAC1\PrePayment_Collection_Invoice_A_SAC1_20250818_1310.csv with 7 records
+2025-08-18T06:10:53.078Z [INFO] Created C:\Code\Prepayment-Collection-Script\output\MAC1\PrePayment_Collection_Invoice_A_MAC1_20250818_1310.csv with 1 records
+2025-08-18T06:10:53.078Z [INFO] Created C:\Code\Prepayment-Collection-Script\output\AEC1\PrePayment_Collection_Invoice_A_AEC1_20250818_1310.csv with 14 records
+2025-08-18T06:10:53.079Z [INFO] Config path: C:\Code\Prepayment-Collection-Script\config.yaml
+2025-08-18T06:10:53.080Z [INFO] Company list path: C:\Code\Prepayment-Collection-Script\CompanyCodeList.xlsx
+2025-08-18T06:10:53.097Z [INFO] Loaded 4 companies from CompanyCodeList.xlsx
+2025-08-18T06:10:53.098Z [INFO] Output folder: C:\Code\Prepayment-Collection-Script\output
+2025-08-18T06:10:53.101Z [INFO] Pre-sweep: found 3 company folders
+2025-08-18T06:10:53.106Z [INFO] Pre-sweep archived older CSVs in C:\Code\Prepayment-Collection-Script\output\AEC1
+2025-08-18T06:10:53.110Z [INFO] Pre-sweep archived older CSVs in C:\Code\Prepayment-Collection-Script\output\MAC1
+2025-08-18T06:10:53.113Z [INFO] Pre-sweep archived older CSVs in C:\Code\Prepayment-Collection-Script\output\SAC1
+2025-08-18T06:10:53.113Z [INFO] Processing CompanyCode: SAC1
+2025-08-18T06:10:53.114Z [INFO] Archived older CSVs for SAC1 (kept newest: PrePayment_Collection_Invoice_A_SAC1_20250818_1310.csv)
+2025-08-18T06:10:53.115Z [INFO] Parsed 7 records from PrePayment_Collection_Invoice_A_SAC1_20250818_1310.csv
+2025-08-18T06:10:55.983Z [ERROR] CPI POST failed: {"url":"https://development-j6vssjjc.it-cpi009-rt.cfapps.us20.hana.ondemand.com/http/Prepayment_automation","requestBody":{"Accountingdocument":"100000983","SFID_I":"LNsac1test1000000012","Customer":"HS58M1PTWJ","SalesDocument":"1SA0001279","SalesDocumentItem":"30","Companycode":"SAC1","Fiscalyear":"2025"},"name":"AxiosError","message":"Request failed with status code 500","code":"ERR_BAD_RESPONSE","stack":"AxiosError: Request failed with status code 500\n    at settle (C:\\snapshot\\dist\\index.js)\n    at IncomingMessage.handleStreamEnd (C:\\snapshot\\dist\\index.js)\n    at IncomingMessage.emit (node:events:539:35)\n    at endReadableNT (node:internal/streams/readable:1345:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)\n    at Axios.request (C:\\snapshot\\dist\\index.js)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at async postJsonWithRetry (C:\\snapshot\\dist\\index.js)\n    at async main (C:\\snapshot\\dist\\index.js)","response":{"status":500,"statusText":"Internal Server Error","data":{"status":"Error","message":"HTTP operation failed invoking https://my409544-api.s4hana.cloud.sap/sap/opu/odata/sap/ZSB_INVOICING_COCKPIT_SRV/sendEInvoiceRequest?Accountingdocument='100000983'&Companycode='SAC1'&Fiscalyear='2025' with statusCode: 500","body":"Runtime Error: 'ITAB_LINE_NOT_FOUND'. The OData request processing has been abnormally terminated. Analyze the runtime error using Feed Reader in ABAP development tools for Eclipse or using transaction /IWFND/ERROR_LOG or /IWBEP/ERROR_LOG or ST22. Create a support ticket on the application component of the OData service for errors in services delivered by SAP."},"headers":{"cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/xml;charset=utf-8","cookie":"sap-usercontext=sap-client=100; path=/; sap-XSRF_C72_100=vf2DOzYBFwsC1U0ycjV_aQ%3d%3d202508180610543lApGmYpI7LCNpnTwbkRrQJswHfyt1bFO9DrEcc9opk%3d; path=/; secure; HttpOnly;","credentials_s4hc":"CPI_COM_USER","dataserviceversion":"1.0","date":"Mon, 18 Aug 2025 06:10:56 GMT","expires":"0","hostname_s4hc":"https://my409544-api.s4hana.cloud.sap","pragma":"no-cache","sap-authenticated":"true","sap-metadata-last-modified":"Sun, 17 Aug 2025 04:15:59 GMT","sap-passport-component":"0016","sap-perf-fesrec":"125898.000000","sap-processing-info":"ODataBEP=,crp=,RAL=,st=,MedCacheHub=Table,MedCacheBEP=Table,codeployed=X,softstate=","sap-server":"true","sap_datastoreentryfound":"true","sap_messageprocessinglogid":"AGiiw-2fqWvum9AB-G9oeBMEo_9t","sap_mplcorrelationid":"AGiiw-2LCagLsbGX8_kYcvttC69j","sap_pregeneratedmplid":"AGiiw_AxvN0x7qXEFchKvruN0P9j","sapcamelallowedhttprequestheaders":"*","sapcamelallowedhttpresponseheaders":"*","sapdatastoreid":"hostname_s4hc","sapenablemplattachments":"true","saphttpreceiveradapterversion":"1.16","sapusecontentlengthforbytearray":"true","server":"SAP","set-cookie":"sap-usercontext=sap-client=100; path=/, sap-XSRF_C72_100=vf2DOzYBFwsC1U0ycjV_aQ%3d%3d202508180610543lApGmYpI7LCNpnTwbkRrQJswHfyt1bFO9DrEcc9opk%3d; path=/; secure; HttpOnly","x-content-type-options":"nosniff","x-correlationid":"66f3ceb2-9b95-4bf4-5320-d22a00dca6cb","x-csrf-token":"vf2DOzYBFwsC1U0ycjV_aQ==","x-frame-options":"DENY","x-vcap-request-id":"66f3ceb2-9b95-4bf4-5320-d22a00dca6cb","x-xss-protection":"1; mode=block","transfer-encoding":"chunked","strict-transport-security":"max-age=31536000; includeSubDomains; preload;","connection":"close"}}}
+2025-08-18T06:10:55.988Z [WARN] Retrying in 1500 ms (attempt 1/2)...

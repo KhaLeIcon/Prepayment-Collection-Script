@@ -1,0 +1,114 @@
+[
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000044",
+    "AccountingDocument": "9400000035",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000440",
+    "SalesDocumentItem": "10"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000078",
+    "AccountingDocument": "9400000063",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000489",
+    "SalesDocumentItem": "10"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000103",
+    "AccountingDocument": "9400000088",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000516",
+    "SalesDocumentItem": "10"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000106",
+    "AccountingDocument": "9400000091",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000516",
+    "SalesDocumentItem": "40"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000107",
+    "AccountingDocument": "9400000092",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000516",
+    "SalesDocumentItem": "50"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000108",
+    "AccountingDocument": "9400000093",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000519",
+    "SalesDocumentItem": "10"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000109",
+    "AccountingDocument": "9400000094",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000519",
+    "SalesDocumentItem": "20"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000110",
+    "AccountingDocument": "9400000095",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000519",
+    "SalesDocumentItem": "30"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000111",
+    "AccountingDocument": "9400000096",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000519",
+    "SalesDocumentItem": "40"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000112",
+    "AccountingDocument": "9400000097",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000519",
+    "SalesDocumentItem": "50"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000115",
+    "AccountingDocument": "9400000100",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000521",
+    "SalesDocumentItem": "10"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000101",
+    "AccountingDocument": "9400000086",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000513",
+    "SalesDocumentItem": "10"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000102",
+    "AccountingDocument": "9400000087",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000515",
+    "SalesDocumentItem": "10"
+  },
+  {
+    "CompanyCode": "AEC1",
+    "BillingDocument": "3AE8000117",
+    "AccountingDocument": "9400000101",
+    "FiscalYear": "2025",
+    "SalesDocument": "3AE0000522",
+    "SalesDocumentItem": "10"
+  }
+]

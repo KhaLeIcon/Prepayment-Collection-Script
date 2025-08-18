@@ -1,0 +1,32 @@
+{
+  "name": "js-compile-project",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "bin": "src/main.js",
+  "scripts": {
+    "build": "pkg . --targets node16-win-x64 --output js-compile-project.exe"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "js-yaml": "^4.1.0",
+    "p-limit": "^3.1.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.3",
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "scripts": [
+      "src/**/*.js"
+    ],
+    "assets": [
+      "config.yaml",
+      "CompanyCodeList.xlsx"
+    ],
+    "targets": [
+      "node16-win-x64"
+    ],
+    "outputPath": "dist"
+  }
+}

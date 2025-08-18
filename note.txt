@@ -1,0 +1,2 @@
+add logger.js to write logs and capture errors v0.5
+optimize checking SO time v0.6 ( npm i p-limit@3 is needed)

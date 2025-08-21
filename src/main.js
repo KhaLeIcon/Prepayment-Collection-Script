@@ -3,6 +3,7 @@ const path = require('path');
 const xlsx = require('xlsx');
 const axios = require('axios');
 const yaml = require('js-yaml');
+const nodemailer = require('nodemailer'); // Added for email functionality
 
 const isPkg = typeof process.pkg !== 'undefined';
 const baseDir = isPkg
@@ -15,9 +16,16 @@ if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
 const logFile = path.join(LOG_DIR, `run_${new Date().toISOString().slice(0,10)}.log`);
 const logStream = fs.createWriteStream(logFile, { flags: 'a' });
 
+// Store current run logs in memory for email attachment
+let currentRunLogs = [];
+
 function logLine(level, ...args) {
   const msg = args.map(a => (typeof a === 'string' ? a : JSON.stringify(a))).join(' ');
   const line = `${new Date().toISOString()} [${level}] ${msg}\n`;
+  
+  // Add to current run logs
+  currentRunLogs.push(line);
+  
   process.stdout.write(line);
   logStream.write(line);
 }
@@ -220,6 +228,56 @@ function parseCsv(csvPath) {
   });
 }
 
+// === EMAIL FUNCTIONALITY ===
+async function sendLogEmail(config) {
+  try {
+    const emailConfig = config.email;
+    if (!emailConfig) {
+      console.warn('No email configuration found in config.yaml - skipping email');
+      return;
+    }
+
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+      host: emailConfig.smtp?.host || 'smtp.gmail.com',
+      port: emailConfig.smtp?.port || 587,
+      secure: emailConfig.smtp?.secure || false,
+      auth: {
+        user: emailConfig.smtp?.user,
+        pass: emailConfig.smtp?.password
+      }
+    });
+
+    // Generate log content from current run
+    const logContent = currentRunLogs.join('');
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const logFileName = `prepayment-automation-log-${timestamp}.txt`;
+
+    // Email options
+    const mailOptions = {
+      from: emailConfig.from || emailConfig.smtp?.user,
+      to: emailConfig.to,
+      cc: emailConfig.cc,
+      subject: emailConfig.subject || `Prepayment Automation Log - ${new Date().toLocaleDateString()}`,
+      text: `Please find attached the log file from the prepayment automation run.\n\nRun completed at: ${new Date().toISOString()}`,
+      attachments: [
+        {
+          filename: logFileName,
+          content: Buffer.from(logContent, 'utf8'),
+          contentType: 'text/plain'
+        }
+      ]
+    };
+
+    console.log(`Sending email to: ${emailConfig.to}`);
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`Email sent successfully: ${info.messageId}`);
+
+  } catch (error) {
+    console.error('Failed to send email:', error?.message || error);
+  }
+}
+
 async function main() {
   console.log('Startup diagnostics →', { isPkg, cwd: process.cwd(), execPath: process.execPath, baseDir });
 
@@ -267,9 +325,9 @@ async function main() {
   // 🔹 NEW: archive older CSVs in ALL company folders up-front
   await sweepArchiveAll(outputfolder);
 
-  // ───────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────
   // SINGLE-PASS over companies (no nested second loop)
-  // ───────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────
   for (const row of companies) {
     const codeRaw = row.CompanyCode;
     const invoiceType = row.InvoiceType;
@@ -370,6 +428,17 @@ async function main() {
   // await sweepArchiveAll(outputfolder);
 
   console.log('All companies processed.');
+  
+  // Send email with current run logs
+  await sendLogEmail(config);
 }
 
-main().catch(err => console.error('Fatal error in main():', err?.stack || err));
+main().catch(err => {
+  console.error('Fatal error in main():', err?.stack || err);
+  // Still try to send email even if main process failed
+  if (typeof config !== 'undefined') {
+    sendLogEmail(config).catch(emailErr => {
+      console.error('Failed to send email after fatal error:', emailErr?.message || emailErr);
+    });
+  }
+});
